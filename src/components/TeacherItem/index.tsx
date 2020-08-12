@@ -1,37 +1,57 @@
 import React from 'react';
 
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
+import api from '../../services/api';
 import './styles.css';  
 
-function TeacherItem () {
+
+ export interface Teacher{
+  id: number;
+  avatar: string;
+  bio: string;
+  cost: number;
+  name: string;
+  subject: string;
+  whatsapp: string;
+
+}
+
+ interface teacherItemProps{
+  teacher: Teacher;
+}
+
+const TeacherItem: React.FC<teacherItemProps> = ({teacher}) => {
+  function createNewConection(){
+    api.post('connections', {
+      user_id: teacher.id,
+    })
+  }
+
   return(
     <article className="teacher-item">
     <header>
-      <img src="https://scontent.fcpq14-1.fna.fbcdn.net/v/t1.0-9/60336815_2153456471428416_4448021955991306240_n.jpg?_nc_cat=109&_nc_sid=09cbfe&_nc_ohc=IEQjrShDnroAX97yYy_&_nc_ht=scontent.fcpq14-1.fna&oh=f5a7401e0fe97613a4a90a1c920721ee&oe=5F4F9B2A" alt="Jhonatan Lima"/>
+      <img src={teacher.avatar} alt={teacher.name}/>
       <div>
-        <strong>Jhonatan Lima</strong>
-        <span>Química</span>
+        <strong>{teacher.name}</strong>
+        <span>{teacher.subject}</span>
       </div>
     </header>
 
     <p>
-     Mussum Ipsum, cacilds vidis litro abertis. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis!
-     <br /><br />
-     Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. 
-     Atirei o pau no gatis, per gatis num morreus. Si num tem leite então bota uma pinga aí cumpadi!
+    {teacher.bio}
     </p>
 
     <footer>
       <p>
         Preço/hora
-        <strong>R$ 2,00</strong>
+        <strong>R$ {teacher.cost}</strong>
       </p>
-      <button type="button">
+      <a target="_blank" onClick={createNewConection} href={'https://api.whatsapp.com/send?phone=${teacher.whatsapp}&text=Ol%C3%A1%20Proffy%2C%20tudo%20bem%3F%20Necessito%20de%20suas%20aulas!'}>
         <img src={whatsappIcon} alt="whatsapp"/>
         Entrar em Contato
-      </button>
+      </a>
     </footer>
-
+Seu sorriso em primeiro Lugar!
   </article>
   );
 }
