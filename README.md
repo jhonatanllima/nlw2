@@ -13,7 +13,7 @@ O projeto possui desafios como tela de login, integração da biblioteca Picker 
 Starting locally
 Execute o seguinte comando no terminal para clonar o projeto:
 
- $ git clone https://github.com/fernando-meira/NextLevelWeek02.git
+ $ git clone https://github.com/jhonatanllima/nlw2.git
 Para a instalação das dependências digite:
 
 yarn
